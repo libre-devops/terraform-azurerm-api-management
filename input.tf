@@ -1,3 +1,9 @@
+variable "apim_settings" {
+  type        = map(any)
+  description = "The settings block for APIM"
+  default     = {}
+}
+
 variable "identity_ids" {
   description = "Specifies a list of user managed identity ids to be assigned to the VM."
   type        = list(string)
