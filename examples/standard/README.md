@@ -9,7 +9,17 @@ module "rg" {
 
   #  lock_level = "CanNotDelete" // Do not set this value to skip lock
 }
-```
+
+module "apim" {
+  source = "../../"
+
+  rg_name = module.rg.rg_name
+  location = module.rg.rg_location
+  tags = module.rg.rg_tags
+  apim_name = "apim-${var.short}-${var.loc}-${terraform.workspace}-01"
+  publisher_email = "craig@craigthacker.dev"
+  publisher_name = "Craig Thacker"
+}```
 ## Requirements
 
 No requirements.
@@ -24,6 +34,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_apim"></a> [apim](#module\_apim) | ../../ | n/a |
 | <a name="module_rg"></a> [rg](#module\_rg) | registry.terraform.io/libre-devops/rg/azurerm | n/a |
 
 ## Resources
