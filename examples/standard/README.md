@@ -11,7 +11,7 @@ module "rg" {
 }
 
 module "apim" {
-  source = "../../"
+  source = "registry.terraform.io/libre-devops/api-management/azurerm"
 
   rg_name         = module.rg.rg_name
   location        = module.rg.rg_location
@@ -19,10 +19,9 @@ module "apim" {
   apim_name       = "apim-${var.short}-${var.loc}-${terraform.workspace}-01"
   publisher_email = "craig@craigthacker.dev"
   publisher_name  = "Craig Thacker"
-  identity_type = "SystemAssigned, UserAssigned"
-  identity_ids = [data.azurerm_user_assigned_identity.mgmt_user_assigned_id.id]
-}
-```
+  identity_type   = "SystemAssigned, UserAssigned"
+  identity_ids    = [data.azurerm_user_assigned_identity.mgmt_user_assigned_id.id]
+}```
 ## Requirements
 
 No requirements.
@@ -37,7 +36,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_apim"></a> [apim](#module\_apim) | ../../ | n/a |
+| <a name="module_apim"></a> [apim](#module\_apim) | registry.terraform.io/libre-devops/api-management/azurerm | n/a |
 | <a name="module_rg"></a> [rg](#module\_rg) | registry.terraform.io/libre-devops/rg/azurerm | n/a |
 
 ## Resources
