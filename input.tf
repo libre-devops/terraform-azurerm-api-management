@@ -9,16 +9,16 @@ variable "apim_settings" {
   default     = {}
 }
 
-variable "gateway_disabled" {
-  type = bool
-  description = "Whether gateway is disabled or not"
-  default = null
-}
-
 variable "client_certificate_enabled" {
   type        = bool
   description = "Whether client ceritifcate is enabled"
   default     = false
+}
+
+variable "gateway_disabled" {
+  type        = bool
+  description = "Whether gateway is disabled or not"
+  default     = null
 }
 
 variable "identity_ids" {
