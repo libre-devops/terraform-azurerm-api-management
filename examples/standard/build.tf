@@ -17,4 +17,6 @@ module "apim" {
   apim_name       = "apim-${var.short}-${var.loc}-${terraform.workspace}-01"
   publisher_email = "craig@craigthacker.dev"
   publisher_name  = "Craig Thacker"
+  identity_type   = "SystemAssigned, UserAssigned"
+  identity_ids    = [data.azurerm_user_assigned_identity.mgmt_user_assigned_id.id]
 }

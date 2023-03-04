@@ -14,6 +14,7 @@ resource "azurerm_api_management" "apim" {
   virtual_network_type          = try(var.virtual_network_type, "Internal", "None")
   tags                          = var.tags
 
+
   dynamic "virtual_network_configuration" {
     for_each = lookup(var.apim_settings, "virtual_network_configuration", {}) != {} ? [1] : []
     content {
@@ -66,18 +67,6 @@ resource "azurerm_api_management" "apim" {
         }
       }
 
-      dynamic "policy" {
-        for_each = lookup(var.apim_settings.hostname_configuration, "portal", {}) != {} ? [1] : []
-        content {
-          host_name                       = lookup(var.apim_settings.hostname_configuration.portal, "host_name", null)
-          key_vault_id                    = lookup(var.apim_settings.hostname_configuration.portal, "key_vault_id", null)
-          certificate                     = lookup(var.apim_settings.hostname_configuration.portal, "certificate", null)
-          certificate_password            = lookup(var.apim_settings.hostname_configuration.portal, "certificate_password", null)
-          negotiate_client_certificate    = lookup(var.apim_settings.hostname_configuration.portal, "negotiate_client_certificate", null)
-          ssl_keyvault_identity_client_id = lookup(var.apim_settings.hostname_configuration.portal, "ssl_keyvault_identity_client_id", null)
-        }
-      }
-
       dynamic "developer_portal" {
         for_each = lookup(var.apim_settings.hostname_configuration, "developer_portal", {}) != {} ? [1] : []
         content {
@@ -116,13 +105,7 @@ resource "azurerm_api_management" "apim" {
     }
   }
 
-  dynamic "policy" {
-    for_each = lookup(var.apim_settings, "policy", {}) != {} ? [1] : []
-    content {
-      xml_content = lookup(var.apim_settings.policy, "xml_content", null)
-      xml_link    = lookup(var.apim_settings.policy, "xml_link", null)
-    }
-  }
+
 
   dynamic "protocols" {
     for_each = lookup(var.apim_settings, "protocols", {}) != {} ? [1] : []
@@ -207,4 +190,13 @@ resource "azurerm_api_management" "apim" {
       identity_ids = length(var.identity_ids) > 0 ? var.identity_ids : []
     }
   }
+
+  dynamic "policy" {
+    for_each = lookup(var.apim_settings, "policy", {}) != {} ? [1] : []
+    content {
+      xml_content = lookup(var.apim_settings.policy, "xml_content", null)
+      xml_link    = lookup(var.apim_settings.policy, "xml_link", null)
+    }
+  }
+
 }
