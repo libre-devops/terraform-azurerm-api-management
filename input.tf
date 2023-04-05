@@ -4,7 +4,7 @@ variable "apim_name" {
 }
 
 variable "apim_settings" {
-  type        = map(any)
+  type        = any
   description = "The settings block for APIM"
   default     = {}
 }
